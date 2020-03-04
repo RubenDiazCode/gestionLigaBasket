@@ -8,6 +8,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
@@ -31,7 +32,11 @@ public class EntrenadorResource {
 		return new ResponseEntity<>(this.entrenadorService.findEntrenadorById(id),HttpStatus.OK);
 	}
 	
-	
+	@GetMapping(path = "/filter/")
+	public ResponseEntity<List<EntrenadorPayload>> getByFullName(@RequestParam(name="nombre")String nombre,
+																@RequestParam(name="apellidos")String apellidos){
+		return new ResponseEntity<>(this.entrenadorService.findByFullName(nombre, apellidos),HttpStatus.OK);
+	}
 	
 	
 }

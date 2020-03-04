@@ -28,26 +28,48 @@ public class EntrenadorService {
 		entrenadorPayload.setEdad(entrenador.getEdad());
 		return entrenadorPayload;
 	}
-	
-	public List<EntrenadorPayload> findAll(){
-		return this.entrenadorRepository.findAll().stream()
-				.map(entrenador -> this.toEntrenadorPayload(entrenador))
+
+	private Entrenador toEntrenador(EntrenadorPayload request) {
+		Entrenador entrenador = new Entrenador();
+		this.saveEntrenador(request, entrenador);
+		return entrenador;
+	}
+
+	// getters
+	public List<EntrenadorPayload> findAll() {
+		return this.entrenadorRepository.findAll().stream().map(entrenador -> this.toEntrenadorPayload(entrenador))
 				.collect(Collectors.toList());
 	}
-	
+
 	private Entrenador findById(Integer id) {
 		if (id == null) {
 			throw ExceptionFactoryUtils.badRequestException("Id cannot be null");
 		}
 		Optional<Entrenador> entrenadorOptional = this.entrenadorRepository.findById(id);
-		if(entrenadorOptional.isPresent())
+		if (entrenadorOptional.isPresent())
 			return entrenadorOptional.get();
-		
+
 		throw ExceptionFactoryUtils.resourceNotFoundException("Entrenador no encontrado");
 	}
-	
+
 	public EntrenadorPayload findEntrenadorById(Integer id) {
 		Entrenador entrenador = this.findById(id);
 		return this.toEntrenadorPayload(entrenador);
 	}
+	
+	public List<EntrenadorPayload> findByFullName(String nombre, String apellidos){
+		return this.entrenadorRepository.findByFullName(nombre, apellidos)
+				.stream().map(entrenador -> this.toEntrenadorPayload(entrenador))
+				.collect(Collectors.toList());
+	}
+
+	// inserts
+	private void saveEntrenador(EntrenadorPayload request, Entrenador entrenador) {
+		entrenador.setNombre(request.getNombre());
+		entrenador.setApellidos(request.getApellidos());
+		entrenador.setEdad(request.getEdad());
+	}
+	
+	
+
 }
