@@ -8,5 +8,6 @@ import talent.campus.examenRubenDiaz.model.Equipo;
 
 public interface EquipoRepository extends JpaRepository<Equipo, Integer>{
 
+
 	
 }
