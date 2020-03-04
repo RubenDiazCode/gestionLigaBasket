@@ -75,8 +75,8 @@ public class EquipoService {
 	}
 	
 	public EquipoPayload create(EquipoPayload request) {
-//		if(this.equipoRepository.existsById(request.getId()))
-//			throw ExceptionFactoryUtils.internalErrorException("El equipo ya existe");
+		if(this.equipoRepository.existsByNombre(request.getNombre()))
+			throw ExceptionFactoryUtils.internalErrorException("El equipo ya existe");
 		
 		Equipo equipo = this.equipoRepository.save(this.toEquipo(request));
 		return this.toEquipoPayload(equipo);
