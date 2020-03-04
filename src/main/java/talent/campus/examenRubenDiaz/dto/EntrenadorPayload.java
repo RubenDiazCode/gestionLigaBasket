@@ -4,6 +4,8 @@ import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import talent.campus.examenRubenDiaz.model.Equipo;
+
 public class EntrenadorPayload {
 	
 	@JsonProperty(value = "id")
@@ -20,6 +22,9 @@ public class EntrenadorPayload {
 	@NotNull
 	@JsonProperty(value = "edad")
 	private Integer edad;
+	
+	@JsonProperty(value = "equipo")
+	private EquipoPayload equipo;
 
 	public Integer getIdEntrenador() {
 		return this.id;
@@ -51,6 +56,22 @@ public class EntrenadorPayload {
 
 	public void setEdad(Integer edad) {
 		this.edad = edad;
+	}
+
+	public Integer getId() {
+		return this.id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public EquipoPayload getEquipoPayload() {
+		return this.equipo;
+	}
+
+	public void setEquipoPayload(EquipoPayload equipoPayload) {
+		this.equipo = equipoPayload;
 	}
 
 	

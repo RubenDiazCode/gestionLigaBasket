@@ -9,7 +9,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
+import talent.campus.examenRubenDiaz.dto.EquipoPayload;
 import talent.campus.examenRubenDiaz.model.Entrenador;
+import talent.campus.examenRubenDiaz.model.Equipo;
 import talent.campus.examenRubenDiaz.repository.EntrenadorRepository;
 import talent.campus.examenRubenDiaz.utils.ExceptionFactoryUtils;
 
@@ -20,12 +22,14 @@ public class EntrenadorService {
 	@Autowired
 	private EntrenadorRepository entrenadorRepository;
 
-	private EntrenadorPayload toEntrenadorPayload(Entrenador entrenador) {
+	public EntrenadorPayload toEntrenadorPayload(Entrenador entrenador) {
+	
 		EntrenadorPayload entrenadorPayload = new EntrenadorPayload();
 		entrenadorPayload.setIdEntrenador(entrenador.getIdEntrenador());
 		entrenadorPayload.setNombre(entrenador.getNombre());
 		entrenadorPayload.setApellidos(entrenador.getApellidos());
 		entrenadorPayload.setEdad(entrenador.getEdad());
+		entrenadorPayload.setEquipoPayload(castToEquipoPayload(entrenador.getEquipo()));
 		return entrenadorPayload;
 	}
 
@@ -34,8 +38,17 @@ public class EntrenadorService {
 		this.saveEntrenador(request, entrenador);
 		return entrenador;
 	}
+	
+	private EquipoPayload castToEquipoPayload(Equipo equipo) {
+		EquipoPayload equipoPayload = new EquipoPayload();
+		equipoPayload.setId(equipo.getId());
+		equipoPayload.setNombre(equipo.getNombre());
+		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
+		
+		return equipoPayload;
+	}
 
-	// getters
+	
 	public List<EntrenadorPayload> findAll() {
 		return this.entrenadorRepository.findAll().stream().map(entrenador -> this.toEntrenadorPayload(entrenador))
 				.collect(Collectors.toList());
@@ -62,7 +75,7 @@ public class EntrenadorService {
 				.map(entrenador -> this.toEntrenadorPayload(entrenador)).collect(Collectors.toList());
 	}
 
-	// inserts
+	
 	private void saveEntrenador(EntrenadorPayload request, Entrenador entrenador) {
 		entrenador.setNombre(request.getNombre());
 		entrenador.setApellidos(request.getApellidos());
@@ -81,6 +94,13 @@ public class EntrenadorService {
 	public void deleteById(Integer id) {
 		Entrenador entrenador = this.findById(id);
 		this.entrenadorRepository.delete(entrenador);
+	}
+	
+	public EntrenadorPayload update(Integer id, EntrenadorPayload request) {
+		Entrenador entrenador = this.findById(id);
+		this.saveEntrenador(request, entrenador);
+		Entrenador entrenadorResult = this.entrenadorRepository.save(entrenador);
+		return  this.toEntrenadorPayload(entrenadorResult);
 	}
 
 }
