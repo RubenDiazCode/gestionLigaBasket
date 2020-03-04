@@ -66,5 +66,17 @@ public class JugadorService {
 		Jugador jugador = this.jugadorRepository.save(this.toJugador(request));
 		return this.toJugadorPayload(jugador);
 	}
+	
+	public void deleteById(Integer id) {
+		Jugador jugador = this.findById(id);
+		this.jugadorRepository.delete(jugador);
+	}
+	
+	public JugadorPayload update(Integer id, JugadorPayload request) {
+		Jugador jugador = this.findById(id);
+		this.saveJugador(request, jugador);
+		Jugador jugadorResult = this.jugadorRepository.save(jugador);
+		return this.toJugadorPayload(jugadorResult);
+	}
 
 }
