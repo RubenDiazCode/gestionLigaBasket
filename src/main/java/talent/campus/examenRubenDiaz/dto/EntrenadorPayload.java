@@ -58,13 +58,7 @@ public class EntrenadorPayload {
 		this.edad = edad;
 	}
 
-	public Integer getId() {
-		return this.id;
-	}
-
-	public void setId(Integer id) {
-		this.id = id;
-	}
+	
 
 //	public EquipoPayload getEquipoPayload() {
 //		return this.equipo;

@@ -81,5 +81,10 @@ public class EquipoService {
 		Equipo equipo = this.equipoRepository.save(this.toEquipo(request));
 		return this.toEquipoPayload(equipo);
 	}
+	
+	public void deleteById(Integer id) {
+		Equipo equipo = this.findById(id);
+		this.equipoRepository.delete(equipo);
+	}
 
 }
