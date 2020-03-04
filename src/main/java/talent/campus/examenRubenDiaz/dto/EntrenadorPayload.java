@@ -6,8 +6,8 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EntrenadorPayload {
 	
-	@JsonProperty(value = "id_entrenador")
-	private Integer idEntrenador;
+	@JsonProperty(value = "id")
+	private Integer id;
 	
 	@NotNull
 	@JsonProperty(value = "nombre")
@@ -22,11 +22,11 @@ public class EntrenadorPayload {
 	private Integer edad;
 
 	public Integer getIdEntrenador() {
-		return this.idEntrenador;
+		return this.id;
 	}
 
 	public void setIdEntrenador(Integer idEntrenador) {
-		this.idEntrenador = idEntrenador;
+		this.id = idEntrenador;
 	}
 
 	public String getNombre() {
