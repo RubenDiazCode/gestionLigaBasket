@@ -29,7 +29,7 @@ public class EntrenadorService {
 		entrenadorPayload.setNombre(entrenador.getNombre());
 		entrenadorPayload.setApellidos(entrenador.getApellidos());
 		entrenadorPayload.setEdad(entrenador.getEdad());
-		entrenadorPayload.setEquipoPayload(castToEquipoPayload(entrenador.getEquipo()));
+	//	entrenadorPayload.setEquipoPayload(castToEquipoPayload(entrenador.getEquipo()));
 		return entrenadorPayload;
 	}
 

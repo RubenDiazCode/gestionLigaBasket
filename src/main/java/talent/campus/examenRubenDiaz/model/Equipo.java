@@ -15,23 +15,26 @@ public class Equipo {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "id_equipo")
+	@Column(name = "id_equipo", updatable = false, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
-	
+
 	@Column(name = "anyo_fundacion")
 	private Integer anyoFundacion;
-	
-	@OneToOne
-	@JoinColumn(name = "entrenador_id_entrenador")
-	private Entrenador entrenador;
+
+//	@OneToOne
+//	@JoinColumn(name = "entrenador_id_entrenador")
+//	private Entrenador entrenador;
 
 	public Integer getId() {
 		return this.id;
 	}
 
+	public void setId(Integer id) {
+		this.id = id;
+	}
 
 	public String getNombre() {
 		return this.nombre;
@@ -49,13 +52,12 @@ public class Equipo {
 		this.anyoFundacion = anyoFundacion;
 	}
 
-	public Entrenador getEntrenador() {
-		return this.entrenador;
-	}
+//	public Entrenador getEntrenador() {
+//		return this.entrenador;
+//	}
+//
+//	public void setEntrenador(Entrenador entrenador) {
+//		this.entrenador = entrenador;
+//	}
 
-	public void setEntrenador(Entrenador entrenador) {
-		this.entrenador = entrenador;
-	}
-	
-	
 }

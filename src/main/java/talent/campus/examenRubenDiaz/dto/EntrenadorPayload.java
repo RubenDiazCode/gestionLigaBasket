@@ -23,8 +23,8 @@ public class EntrenadorPayload {
 	@JsonProperty(value = "edad")
 	private Integer edad;
 	
-	@JsonProperty(value = "equipo")
-	private EquipoPayload equipo;
+//	@JsonProperty(value = "equipo")
+//	private EquipoPayload equipo;
 
 	public Integer getIdEntrenador() {
 		return this.id;
@@ -66,13 +66,13 @@ public class EntrenadorPayload {
 		this.id = id;
 	}
 
-	public EquipoPayload getEquipoPayload() {
-		return this.equipo;
-	}
-
-	public void setEquipoPayload(EquipoPayload equipoPayload) {
-		this.equipo = equipoPayload;
-	}
+//	public EquipoPayload getEquipoPayload() {
+//		return this.equipo;
+//	}
+//
+//	public void setEquipoPayload(EquipoPayload equipoPayload) {
+//		this.equipo = equipoPayload;
+//	}
 
 	
 }

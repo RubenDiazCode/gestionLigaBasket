@@ -28,7 +28,7 @@ public class EquipoService {
 		equipoPayload.setId(equipo.getId());
 		equipoPayload.setNombre(equipo.getNombre());
 		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
-		equipoPayload.setEntrenador(castToEntrenadorPayload(equipo.getEntrenador()));
+	//	equipoPayload.setEntrenador(castToEntrenadorPayload(equipo.getEntrenador()));
 		return equipoPayload;
 
 	}
@@ -75,8 +75,9 @@ public class EquipoService {
 	}
 	
 	public EquipoPayload create(EquipoPayload request) {
-		if(this.equipoRepository.existsById(request.getId()))
-			throw ExceptionFactoryUtils.internalErrorException("El equipo ya existe");
+//		if(this.equipoRepository.existsById(request.getId()))
+//			throw ExceptionFactoryUtils.internalErrorException("El equipo ya existe");
+		
 		Equipo equipo = this.equipoRepository.save(this.toEquipo(request));
 		return this.toEquipoPayload(equipo);
 	}
