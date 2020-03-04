@@ -56,11 +56,10 @@ public class EntrenadorService {
 		Entrenador entrenador = this.findById(id);
 		return this.toEntrenadorPayload(entrenador);
 	}
-	
-	public List<EntrenadorPayload> findByFullName(String nombre, String apellidos){
-		return this.entrenadorRepository.findByFullName(nombre, apellidos)
-				.stream().map(entrenador -> this.toEntrenadorPayload(entrenador))
-				.collect(Collectors.toList());
+
+	public List<EntrenadorPayload> findByFullName(String nombre, String apellidos) {
+		return this.entrenadorRepository.findByFullName(nombre, apellidos).stream()
+				.map(entrenador -> this.toEntrenadorPayload(entrenador)).collect(Collectors.toList());
 	}
 
 	// inserts
@@ -69,16 +68,19 @@ public class EntrenadorService {
 		entrenador.setApellidos(request.getApellidos());
 		entrenador.setEdad(request.getEdad());
 	}
-	
-	public EntrenadorPayload create (EntrenadorPayload request) {
-		if(this.entrenadorRepository.existsByNombreAndApellidos(request.getNombre(), request.getApellidos())) 
+
+	public EntrenadorPayload create(EntrenadorPayload request) {
+		if (this.entrenadorRepository.existsByNombreAndApellidos(request.getNombre(), request.getApellidos()))
 			throw ExceptionFactoryUtils.internalErrorException("El entrenador ya existe");
-		
+
 		Entrenador entrenador = this.entrenadorRepository.save(this.toEntrenador(request));
 		return this.toEntrenadorPayload(entrenador);
-		
+
 	}
-	
-	
+
+	public void deleteById(Integer id) {
+		Entrenador entrenador = this.findById(id);
+		this.entrenadorRepository.delete(entrenador);
+	}
 
 }

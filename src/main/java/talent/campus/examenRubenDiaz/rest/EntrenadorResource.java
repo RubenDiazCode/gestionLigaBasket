@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -45,6 +46,12 @@ public class EntrenadorResource {
 	public ResponseEntity<EntrenadorPayload> create(@RequestBody EntrenadorPayload request){
 		EntrenadorPayload entrenadorPayload = this.entrenadorService.create(request);
 		return new ResponseEntity<>(entrenadorPayload, HttpHeaderUtils.locationHeader(entrenadorPayload.getIdEntrenador()),HttpStatus.CREATED);
+	}
+	
+	@DeleteMapping(path = "/{id}/")
+	public ResponseEntity<Void> delete(@PathVariable("id")Integer id){
+		this.entrenadorService.deleteById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 	
 	
