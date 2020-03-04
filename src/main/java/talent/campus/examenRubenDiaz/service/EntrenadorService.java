@@ -70,6 +70,15 @@ public class EntrenadorService {
 		entrenador.setEdad(request.getEdad());
 	}
 	
+	public EntrenadorPayload create (EntrenadorPayload request) {
+		if(this.entrenadorRepository.existsByNombreAndApellidos(request.getNombre(), request.getApellidos())) 
+			throw ExceptionFactoryUtils.internalErrorException("El entrenador ya existe");
+		
+		Entrenador entrenador = this.entrenadorRepository.save(this.toEntrenador(request));
+		return this.toEntrenadorPayload(entrenador);
+		
+	}
+	
 	
 
 }

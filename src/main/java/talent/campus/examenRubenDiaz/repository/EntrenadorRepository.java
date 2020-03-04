@@ -13,7 +13,8 @@ public interface EntrenadorRepository extends JpaRepository<Entrenador, Integer>
 	@Override
 	Optional<Entrenador> findById(Integer id);
 
+	Boolean existsByNombreAndApellidos(String nombre, String apellidos);
+
 	@Query("SELECT e FROM Entrenador e WHERE e.nombre LIKE :nombre AND e.apellidos LIKE :apellidos")
-	List<Entrenador> findByFullName(@Param("nombre") String nombre,
-			@Param("apellidos") String apellidos);
+	List<Entrenador> findByFullName(@Param("nombre") String nombre, @Param("apellidos") String apellidos);
 }

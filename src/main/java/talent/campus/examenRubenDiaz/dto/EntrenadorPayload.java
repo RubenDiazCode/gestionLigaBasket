@@ -25,8 +25,8 @@ public class EntrenadorPayload {
 		return this.id;
 	}
 
-	public void setIdEntrenador(Integer idEntrenador) {
-		this.id = idEntrenador;
+	public void setIdEntrenador(Integer id) {
+		this.id = id;
 	}
 
 	public String getNombre() {
