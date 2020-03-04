@@ -86,5 +86,12 @@ public class EquipoService {
 		Equipo equipo = this.findById(id);
 		this.equipoRepository.delete(equipo);
 	}
+	
+	public EquipoPayload update(Integer id, EquipoPayload request) {
+		Equipo equipo = this.findById(id);
+		this.saveEquipo(request, equipo);
+		Equipo equipoResult = this.equipoRepository.save(equipo);
+		return this.toEquipoPayload(equipoResult);
+	}
 
 }
