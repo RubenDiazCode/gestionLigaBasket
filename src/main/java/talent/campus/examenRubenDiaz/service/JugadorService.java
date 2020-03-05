@@ -142,5 +142,12 @@ public class JugadorService {
 		return this.toJugadorPayload(jugadorResult);
 		
 	}
+	
+	//ejercicio 3
+	public List<JugadorPayload> findByEquipoAndEdad(Integer id, Integer edad){
+		return this.jugadorRepository.findByEquipoAndEdad(id, edad).stream()
+				.map(jugador -> this.toJugadorPayload(jugador))
+				.collect(Collectors.toList());
+	}
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import talent.campus.examenRubenDiaz.dto.JugadorPayload;
@@ -32,6 +33,12 @@ public class JugadorResource {
 	@GetMapping(path = "/id/{id}/")
 	public ResponseEntity<JugadorPayload> findById(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(this.jugadorService.findJugadorById(id), HttpStatus.OK);
+	}
+	
+	@GetMapping(path ="/filter/")
+	public ResponseEntity<List<JugadorPayload>> getByEquipoAndEdad(@RequestParam(name="id")Integer id,
+																@RequestParam(name="edad")Integer edad){
+		return new ResponseEntity<>(this.jugadorService.findByEquipoAndEdad(id, edad), HttpStatus.OK);
 	}
 	
 	@PostMapping

@@ -12,10 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
 import talent.campus.examenRubenDiaz.dto.EquipoPayload;
+import talent.campus.examenRubenDiaz.dto.JugadorPayload;
 import talent.campus.examenRubenDiaz.service.EquipoService;
 import talent.campus.examenRubenDiaz.utils.HttpHeaderUtils;
 
@@ -35,6 +36,8 @@ public class EquipoResource {
 	public ResponseEntity<EquipoPayload> findById(@PathVariable("id")Integer id){
 		return new ResponseEntity<>(this.equipoService.findEquipoById(id),HttpStatus.OK);
 	}
+	
+
 	
 	@PostMapping
 	public ResponseEntity<EquipoPayload> create(@RequestBody EquipoPayload request){
@@ -57,5 +60,7 @@ public class EquipoResource {
 	public ResponseEntity<EquipoPayload> updateEntrenador(@PathVariable("id") Integer id, @RequestBody EquipoPayload request){
 		return new ResponseEntity<>(this.equipoService.updateEntrenador(id, request),HttpStatus.OK);
 	}
+	
+	
 
 }

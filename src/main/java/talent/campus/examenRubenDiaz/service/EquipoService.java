@@ -167,5 +167,8 @@ public class EquipoService {
 		return this.toEquipoPayload(equipoResult);
 		
 	}
+	
+	
+
 
 }
