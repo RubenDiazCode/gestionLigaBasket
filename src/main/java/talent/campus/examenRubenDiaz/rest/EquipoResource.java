@@ -36,6 +36,10 @@ public class EquipoResource {
 	public ResponseEntity<EquipoPayload> findById(@PathVariable("id")Integer id){
 		return new ResponseEntity<>(this.equipoService.findEquipoById(id),HttpStatus.OK);
 	}
+	@GetMapping(path = "/filter/")
+	public ResponseEntity<List<EquipoPayload>> findByNombreJugador(@RequestParam(name="nombre")String nombre){
+		return new ResponseEntity<>(this.equipoService.findByNombreJugador(nombre),HttpStatus.OK);
+	}
 	
 
 	

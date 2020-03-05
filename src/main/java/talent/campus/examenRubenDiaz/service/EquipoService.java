@@ -168,6 +168,13 @@ public class EquipoService {
 		
 	}
 	
+	//ejercicio 3
+	public List<EquipoPayload> findByNombreJugador(String nombre){
+		List<EquipoPayload> lista = this.equipoRepository.findByNombreJugador(nombre).stream().map(equipo -> this.toEquipoPayload(equipo))
+				.collect(Collectors.toList());
+		return lista;
+	}
+	
 	
 
 
