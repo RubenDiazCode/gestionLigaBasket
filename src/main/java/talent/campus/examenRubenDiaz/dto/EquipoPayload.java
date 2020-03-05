@@ -1,8 +1,8 @@
 package talent.campus.examenRubenDiaz.dto;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
+import java.util.List;
 
-import talent.campus.examenRubenDiaz.model.Entrenador;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class EquipoPayload {
 
@@ -17,6 +17,11 @@ public class EquipoPayload {
 	
 	@JsonProperty(value = "entrenador")
 	private EntrenadorPayload entrenador;
+	
+	@JsonProperty(value = "jugadores")
+	private List<JugadorPayload> jugadores;
+
+	
 
 	public Integer getId() {
 		return this.id;
@@ -48,6 +53,14 @@ public class EquipoPayload {
 
 	public void setEntrenador(EntrenadorPayload entrenador) {
 		this.entrenador = entrenador;
+	}
+	
+	public List<JugadorPayload> getJugadores() {
+		return this.jugadores;
+	}
+
+	public void setJugadores(List<JugadorPayload> jugadores) {
+		this.jugadores = jugadores;
 	}
 	
 	

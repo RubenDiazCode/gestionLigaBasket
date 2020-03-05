@@ -52,5 +52,10 @@ public class EquipoResource {
 	public ResponseEntity<EquipoPayload> update(@PathVariable("id") Integer id, @RequestBody EquipoPayload request){
 		return new ResponseEntity<>(this.equipoService.update(id, request),HttpStatus.OK);
 	}
+	
+	@PutMapping(path="/entrenador/{id}/")
+	public ResponseEntity<EquipoPayload> updateEntrenador(@PathVariable("id") Integer id, @RequestBody EquipoPayload request){
+		return new ResponseEntity<>(this.equipoService.updateEntrenador(id, request),HttpStatus.OK);
+	}
 
 }

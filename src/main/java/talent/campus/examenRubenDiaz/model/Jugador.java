@@ -1,10 +1,14 @@
 package talent.campus.examenRubenDiaz.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 @Entity
@@ -25,7 +29,10 @@ public class Jugador {
 	@Column(name = "edad")
 	private Integer edad;
 	
-//	private Equipo equipo;
+	@ManyToOne(cascade=CascadeType.ALL)
+	@JoinColumn(name = "equipo_id_equipo")
+	private Equipo equipo;
+	
 
 	public Integer getId() {
 		return this.id;
@@ -59,13 +66,13 @@ public class Jugador {
 		this.edad = edad;
 	}
 
-//	public Equipo getEquipo() {
-//		return this.equipo;
-//	}
-//
-//	public void setEquipo(Equipo equipo) {
-//		this.equipo = equipo;
-//	}
+	public Equipo getEquipo() {
+		return this.equipo;
+	}
+
+	public void setEquipo(Equipo equipo) {
+		this.equipo = equipo;
+	}
 	
 	
 	

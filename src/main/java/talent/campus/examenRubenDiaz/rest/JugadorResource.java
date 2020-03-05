@@ -51,4 +51,9 @@ public class JugadorResource {
 		return new ResponseEntity<>(this.jugadorService.update(id, request),HttpStatus.OK);
 	}
 	
+	@PutMapping(path="/equipo/{id}/")
+	public ResponseEntity<JugadorPayload> updateEquipo(@PathVariable("id")Integer id, @RequestBody JugadorPayload request){
+		return new ResponseEntity<>(this.jugadorService.updateEquipo(id, request),HttpStatus.OK);
+	}
+	
 }

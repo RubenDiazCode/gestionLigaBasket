@@ -13,6 +13,7 @@ import talent.campus.examenRubenDiaz.dto.EquipoPayload;
 import talent.campus.examenRubenDiaz.model.Entrenador;
 import talent.campus.examenRubenDiaz.model.Equipo;
 import talent.campus.examenRubenDiaz.repository.EntrenadorRepository;
+import talent.campus.examenRubenDiaz.repository.EquipoRepository;
 import talent.campus.examenRubenDiaz.utils.ExceptionFactoryUtils;
 
 @Service
@@ -102,5 +103,6 @@ public class EntrenadorService {
 		Entrenador entrenadorResult = this.entrenadorRepository.save(entrenador);
 		return  this.toEntrenadorPayload(entrenadorResult);
 	}
-
+	
+	
 }
