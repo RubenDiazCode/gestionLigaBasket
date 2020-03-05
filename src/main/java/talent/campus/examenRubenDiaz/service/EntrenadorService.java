@@ -30,7 +30,6 @@ public class EntrenadorService {
 		entrenadorPayload.setNombre(entrenador.getNombre());
 		entrenadorPayload.setApellidos(entrenador.getApellidos());
 		entrenadorPayload.setEdad(entrenador.getEdad());
-	//	entrenadorPayload.setEquipoPayload(castToEquipoPayload(entrenador.getEquipo()));
 		return entrenadorPayload;
 	}
 
@@ -39,15 +38,7 @@ public class EntrenadorService {
 		this.saveEntrenador(request, entrenador);
 		return entrenador;
 	}
-	
-	private EquipoPayload castToEquipoPayload(Equipo equipo) {
-		EquipoPayload equipoPayload = new EquipoPayload();
-		equipoPayload.setId(equipo.getId());
-		equipoPayload.setNombre(equipo.getNombre());
-		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
-		
-		return equipoPayload;
-	}
+
 
 	
 	public List<EntrenadorPayload> findAll() {

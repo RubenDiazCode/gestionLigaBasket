@@ -28,22 +28,30 @@ public class EquipoService {
 	private EquipoRepository equipoRepository;
 	@Autowired
 	private EntrenadorRepository entrenadorRepository;
+	@Autowired
+	private EntrenadorService entrenadorService;
 
 	public EquipoPayload toEquipoPayload(Equipo equipo) {
 		EquipoPayload equipoPayload = new EquipoPayload();
 		equipoPayload.setId(equipo.getId());
 		equipoPayload.setNombre(equipo.getNombre());
-		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
-		//equipoPayload.setEntrenador(castToEntrenadorPayload(equipo.getEntrenador()));
 		equipoPayload.setJugadores(castToListJugadorPayload(equipo.getJugadores()));
+		if(equipo.getEntrenador()==null) {
+			equipoPayload.setEntrenador(null);
+		}else {	
+			equipoPayload.setEntrenador(entrenadorService.toEntrenadorPayload(equipo.getEntrenador()));
+		}
 		return equipoPayload;
-
 	}
+	
+	
+	
+	
+	
 	private void saveEquipo(EquipoPayload request, Equipo equipo) {
 		equipo.setNombre(request.getNombre());
 		equipo.setAnyoFundacion(request.getAnyoFundacion());
-		//equipo.setEntrenador(toEntrenador(request.getEntrenador()));
-		//equipo.setJugadores(castToListJugador(request.getJugadores()));
+	
 	}
 	
 	private Equipo toEquipo(EquipoPayload request) {
@@ -60,7 +68,6 @@ public class EquipoService {
 			jugadorPayload.setNombre(j.getNombre());
 			jugadorPayload.setApellidos(j.getApellidos());
 			jugadorPayload.setEdad(j.getEdad());
-			//jugadorPayload.setEquipo(toEquipoPayload(j.getEquipo()));
 			listaJugadores.add(jugadorPayload);
 		}
 		return listaJugadores;
@@ -78,43 +85,7 @@ public class EquipoService {
 		}
 		return listaJugadores;
 	}
-	
-	private void saveJugador(JugadorPayload request, Jugador jugador) {
-		jugador.setNombre(request.getNombre());
-		jugador.setApellidos(request.getApellidos());
-		jugador.setEdad(request.getEdad());
-		jugador.setEquipo(toEquipo(request.getEquipo()));
-	}
 
-	private Jugador toJugador(JugadorPayload request) {
-		Jugador jugador = new Jugador();
-		this.saveJugador(request, jugador);
-		return jugador;
-	}
-	
-
-	public EntrenadorPayload castToEntrenadorPayload(Entrenador entrenador) {
-		EntrenadorPayload entrenadorPayload = new EntrenadorPayload();
-		entrenadorPayload.setIdEntrenador(entrenador.getIdEntrenador());
-		entrenadorPayload.setNombre(entrenador.getNombre());
-		entrenadorPayload.setApellidos(entrenador.getApellidos());
-		entrenadorPayload.setEdad(entrenador.getEdad());
-		//entrenadorPayload.setEquipoPayload(toEquipoPayload(entrenador.getEquipo()));
-
-		return entrenadorPayload;
-	}
-	
-	private Entrenador toEntrenador(EntrenadorPayload request) {
-		Entrenador entrenador = new Entrenador();
-		this.saveEntrenador(request, entrenador);
-		return entrenador;
-	}
-	
-	private void saveEntrenador(EntrenadorPayload request, Entrenador entrenador) {
-		entrenador.setNombre(request.getNombre());
-		entrenador.setApellidos(request.getApellidos());
-		entrenador.setEdad(request.getEdad());
-	}
 
 	public List<EquipoPayload> findAll() {
 		return this.equipoRepository.findAll().stream().map(equipo -> this.toEquipoPayload(equipo))

@@ -41,8 +41,6 @@ public class EquipoResource {
 		return new ResponseEntity<>(this.equipoService.findByNombreJugador(nombre),HttpStatus.OK);
 	}
 	
-
-	
 	@PostMapping
 	public ResponseEntity<EquipoPayload> create(@RequestBody EquipoPayload request){
 		EquipoPayload equipoPayload = this.equipoService.create(request);
