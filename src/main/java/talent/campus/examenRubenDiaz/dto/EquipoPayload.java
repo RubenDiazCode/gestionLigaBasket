@@ -15,8 +15,8 @@ public class EquipoPayload {
 	@JsonProperty(value = "anyo_fundacion")
 	private Integer anyoFundacion;
 	
-//	@JsonProperty(value = "entrenador")
-//	private EntrenadorPayload entrenador;
+	@JsonProperty(value = "entrenador")
+	private EntrenadorPayload entrenador;
 
 	public Integer getId() {
 		return this.id;
@@ -42,13 +42,13 @@ public class EquipoPayload {
 		this.anyoFundacion = anyoFundacion;
 	}
 
-//	public EntrenadorPayload getEntrenador() {
-//		return this.entrenador;
-//	}
-//
-//	public void setEntrenador(EntrenadorPayload entrenador) {
-//		this.entrenador = entrenador;
-//	}
-//	
+	public EntrenadorPayload getEntrenador() {
+		return this.entrenador;
+	}
+
+	public void setEntrenador(EntrenadorPayload entrenador) {
+		this.entrenador = entrenador;
+	}
+	
 	
 }

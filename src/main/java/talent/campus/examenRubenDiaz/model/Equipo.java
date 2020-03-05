@@ -24,9 +24,9 @@ public class Equipo {
 	@Column(name = "anyo_fundacion")
 	private Integer anyoFundacion;
 
-//	@OneToOne
-//	@JoinColumn(name = "entrenador_id_entrenador")
-//	private Entrenador entrenador;
+	@OneToOne
+	@JoinColumn(name = "entrenador_id_entrenador")
+	private Entrenador entrenador;
 
 	public Integer getId() {
 		return this.id;
@@ -52,12 +52,12 @@ public class Equipo {
 		this.anyoFundacion = anyoFundacion;
 	}
 
-//	public Entrenador getEntrenador() {
-//		return this.entrenador;
-//	}
-//
-//	public void setEntrenador(Entrenador entrenador) {
-//		this.entrenador = entrenador;
-//	}
+	public Entrenador getEntrenador() {
+		return this.entrenador;
+	}
+
+	public void setEntrenador(Entrenador entrenador) {
+		this.entrenador = entrenador;
+	}
 
 }

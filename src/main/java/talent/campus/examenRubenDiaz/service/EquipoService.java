@@ -28,14 +28,14 @@ public class EquipoService {
 		equipoPayload.setId(equipo.getId());
 		equipoPayload.setNombre(equipo.getNombre());
 		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
-	//	equipoPayload.setEntrenador(castToEntrenadorPayload(equipo.getEntrenador()));
+		equipoPayload.setEntrenador(castToEntrenadorPayload(equipo.getEntrenador()));
 		return equipoPayload;
 
 	}
 	private void saveEquipo(EquipoPayload request, Equipo equipo) {
 		equipo.setNombre(request.getNombre());
 		equipo.setAnyoFundacion(request.getAnyoFundacion());
-		//equipo.setEntrenador(request.getEntrenador());
+		equipo.setEntrenador(toEntrenador(request.getEntrenador()));
 	}
 	
 	private Equipo toEquipo(EquipoPayload request) {
@@ -50,9 +50,21 @@ public class EquipoService {
 		entrenadorPayload.setNombre(entrenador.getNombre());
 		entrenadorPayload.setApellidos(entrenador.getApellidos());
 		entrenadorPayload.setEdad(entrenador.getEdad());
-		// entrenadorPayload.setEquipoPayload(toEquipoPayload(entrenador.getEquipo()));
+		//entrenadorPayload.setEquipoPayload(toEquipoPayload(entrenador.getEquipo()));
 
 		return entrenadorPayload;
+	}
+	
+	private Entrenador toEntrenador(EntrenadorPayload request) {
+		Entrenador entrenador = new Entrenador();
+		this.saveEntrenador(request, entrenador);
+		return entrenador;
+	}
+	
+	private void saveEntrenador(EntrenadorPayload request, Entrenador entrenador) {
+		entrenador.setNombre(request.getNombre());
+		entrenador.setApellidos(request.getApellidos());
+		entrenador.setEdad(request.getEdad());
 	}
 
 	public List<EquipoPayload> findAll() {
