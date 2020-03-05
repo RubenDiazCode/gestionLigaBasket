@@ -29,7 +29,7 @@ public class Jugador {
 	@Column(name = "edad")
 	private Integer edad;
 	
-	@ManyToOne(cascade=CascadeType.ALL)
+	@ManyToOne
 	@JoinColumn(name = "equipo_id_equipo")
 	private Equipo equipo;
 	
