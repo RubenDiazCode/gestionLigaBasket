@@ -8,10 +8,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
-
 import talent.campus.examenRubenDiaz.dto.PartidoPayload;
 import talent.campus.examenRubenDiaz.service.PartidoService;
 import talent.campus.examenRubenDiaz.utils.HttpHeaderUtils;
@@ -32,11 +32,17 @@ public class PartidoResource {
 	public ResponseEntity<PartidoPayload> findById(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(this.partidoService.findPartidoById(id), HttpStatus.OK);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<PartidoPayload> create(@RequestBody PartidoPayload request){
+	public ResponseEntity<PartidoPayload> create(@RequestBody PartidoPayload request) {
 		PartidoPayload partidoPayload = this.partidoService.create(request);
-		return new ResponseEntity<>(partidoPayload, HttpHeaderUtils.locationHeader(partidoPayload.getId()),HttpStatus.CREATED );
+		return new ResponseEntity<>(partidoPayload, HttpHeaderUtils.locationHeader(partidoPayload.getId()),
+				HttpStatus.CREATED);
+	}
+
+	@PutMapping(path = "/{id}/")
+	public ResponseEntity<PartidoPayload> update(@PathVariable("id") Integer id, @RequestBody PartidoPayload request) {
+		return new ResponseEntity<>(this.partidoService.update(id, request), HttpStatus.OK);
 	}
 
 }

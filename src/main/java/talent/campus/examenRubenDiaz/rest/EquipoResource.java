@@ -22,46 +22,47 @@ import talent.campus.examenRubenDiaz.utils.HttpHeaderUtils;
 @RestController
 @RequestMapping("/api/equipo/")
 public class EquipoResource {
-	
+
 	@Autowired
 	private EquipoService equipoService;
-	
+
 	@GetMapping
-	public ResponseEntity<List<EquipoPayload>> findAll(){
-		return new ResponseEntity<>(this.equipoService.findAll(),HttpStatus.OK);
+	public ResponseEntity<List<EquipoPayload>> findAll() {
+		return new ResponseEntity<>(this.equipoService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(path = "/id/{id}/")
-	public ResponseEntity<EquipoPayload> findById(@PathVariable("id")Integer id){
-		return new ResponseEntity<>(this.equipoService.findEquipoById(id),HttpStatus.OK);
+	public ResponseEntity<EquipoPayload> findById(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(this.equipoService.findEquipoById(id), HttpStatus.OK);
 	}
+
 	@GetMapping(path = "/filter/")
-	public ResponseEntity<List<EquipoPayload>> findByNombreJugador(@RequestParam(name="nombre")String nombre){
-		return new ResponseEntity<>(this.equipoService.findByNombreJugador(nombre),HttpStatus.OK);
+	public ResponseEntity<List<EquipoPayload>> findByNombreJugador(@RequestParam(name = "nombre") String nombre) {
+		return new ResponseEntity<>(this.equipoService.findByNombreJugador(nombre), HttpStatus.OK);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<EquipoPayload> create(@RequestBody EquipoPayload request){
+	public ResponseEntity<EquipoPayload> create(@RequestBody EquipoPayload request) {
 		EquipoPayload equipoPayload = this.equipoService.create(request);
-		return new ResponseEntity<>(equipoPayload, HttpHeaderUtils.locationHeader(equipoPayload.getId()),HttpStatus.CREATED );
+		return new ResponseEntity<>(equipoPayload, HttpHeaderUtils.locationHeader(equipoPayload.getId()),
+				HttpStatus.CREATED);
 	}
-	
-	@DeleteMapping(path="/{id}/")
-	public ResponseEntity<Void> delete(@PathVariable("id")Integer id){
+
+	@DeleteMapping(path = "/{id}/")
+	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		this.equipoService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	@PutMapping(path="/{id}/")
-	public ResponseEntity<EquipoPayload> update(@PathVariable("id") Integer id, @RequestBody EquipoPayload request){
-		return new ResponseEntity<>(this.equipoService.update(id, request),HttpStatus.OK);
+
+	@PutMapping(path = "/{id}/")
+	public ResponseEntity<EquipoPayload> update(@PathVariable("id") Integer id, @RequestBody EquipoPayload request) {
+		return new ResponseEntity<>(this.equipoService.update(id, request), HttpStatus.OK);
 	}
-	
-	@PutMapping(path="/entrenador/{id}/")
-	public ResponseEntity<EquipoPayload> updateEntrenador(@PathVariable("id") Integer id, @RequestBody EquipoPayload request){
-		return new ResponseEntity<>(this.equipoService.updateEntrenador(id, request),HttpStatus.OK);
+
+	@PutMapping(path = "/entrenador/{id}/")
+	public ResponseEntity<EquipoPayload> updateEntrenador(@PathVariable("id") Integer id,
+			@RequestBody EquipoPayload request) {
+		return new ResponseEntity<>(this.equipoService.updateEntrenador(id, request), HttpStatus.OK);
 	}
-	
-	
 
 }

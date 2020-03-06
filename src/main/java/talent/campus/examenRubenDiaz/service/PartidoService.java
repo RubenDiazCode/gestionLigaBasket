@@ -78,5 +78,16 @@ public class PartidoService {
 		this.savePartido(request, partido);
 		return partido;
 	}
+	
+	public PartidoPayload update(Integer id, PartidoPayload request) {
+		Partido partido = this.findById(id);
+		EquipoPayload equipoLocal = this.equipoService.findEquipoById(request.getEquipoLocal().getId());
+		EquipoPayload equipoVisitante = this.equipoService.findEquipoById(request.getEquipoVisitante().getId());
+		request.setEquipoLocal(equipoLocal);
+		request.setEquipoVisitante(equipoVisitante);
+		this.savePartido(request, partido);
+		Partido partidoResult = this.partidoRepository.save(partido);
+		return this.toPartidoPayload(partidoResult);
+	}
 
 }
