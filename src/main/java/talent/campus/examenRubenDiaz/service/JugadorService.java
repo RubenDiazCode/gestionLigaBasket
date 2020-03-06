@@ -9,10 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
-import talent.campus.examenRubenDiaz.dto.EquipoPayload;
 import talent.campus.examenRubenDiaz.dto.JugadorPayload;
-import talent.campus.examenRubenDiaz.model.Entrenador;
 import talent.campus.examenRubenDiaz.model.Equipo;
 import talent.campus.examenRubenDiaz.model.Jugador;
 import talent.campus.examenRubenDiaz.repository.EquipoRepository;
@@ -39,7 +36,7 @@ public class JugadorService {
 		if(jugador.getEquipo()==null) {
 			jugadorPayload.setEquipo(null);
 		}else {
-			jugadorPayload.setEquipo(equipoService.toEquipoPayload(jugador.getEquipo()));
+			jugadorPayload.setEquipo(this.equipoService.toEquipoPayload(jugador.getEquipo()));
 		}
 		
 		return jugadorPayload;

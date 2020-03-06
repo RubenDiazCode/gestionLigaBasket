@@ -39,7 +39,7 @@ public class EquipoService {
 		if(equipo.getEntrenador()==null) {
 			equipoPayload.setEntrenador(null);
 		}else {	
-			equipoPayload.setEntrenador(entrenadorService.toEntrenadorPayload(equipo.getEntrenador()));
+			equipoPayload.setEntrenador(this.entrenadorService.toEntrenadorPayload(equipo.getEntrenador()));
 		}
 		return equipoPayload;
 	}
