@@ -34,7 +34,7 @@ public class Equipo {
 	private Entrenador entrenador;
 
 	@OneToMany(mappedBy = "equipo")
-	private List<Jugador> jugadores = new ArrayList<Jugador>();
+	private List<Jugador> jugadores = new ArrayList<>();
 	
 	@OneToMany(mappedBy = "equipoLocal")
 	private List<Partido> partidosLocal = new ArrayList<>();

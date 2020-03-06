@@ -78,8 +78,6 @@ public class EquipoService {
 		for(Partido p: request) {
 			PartidoPayload partidoPayload = new PartidoPayload();
 			partidoPayload.setId(p.getId());
-//			partidoPayload.setEquipoLocal(toEquipoPayload(p.getEquipoLocal()));
-//			partidoPayload.setEquipoVisitante(toEquipoPayload(p.getEquipoVisitante()));
 			partidoPayload.setFecha(p.getFecha());
 			partidoPayload.setPuntuacionEquipoLocal(p.getPuntuacionEquipoLocal());
 			partidoPayload.setPuntuacionEquipoVisitante(p.getPuntuacionEquipoVisitante());
@@ -87,20 +85,7 @@ public class EquipoService {
 		return listaPartidos;
 	}
 
-//	
-//	public List<Jugador> castToListJugador(List<JugadorPayload> request){
-//		List<Jugador> listaJugadores = new ArrayList<>();
-//		for(JugadorPayload j: request) {
-//			Jugador jugador = new Jugador();
-//			jugador.setId(j.getId());
-//			jugador.setNombre(j.getNombre());
-//			jugador.setApellidos(j.getApellidos());
-//			jugador.setEdad(j.getEdad());
-//			jugador.setEquipo(toEquipo(j.getEquipo()));
-//			listaJugadores.add(jugador);
-//		}
-//		return listaJugadores;
-//	}
+
 
 	public List<EquipoPayload> findAll() {
 		return this.equipoRepository.findAll().stream().map(equipo -> this.toEquipoPayload(equipo))

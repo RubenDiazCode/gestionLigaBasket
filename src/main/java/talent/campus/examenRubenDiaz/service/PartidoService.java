@@ -1,6 +1,7 @@
 package talent.campus.examenRubenDiaz.service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
@@ -11,16 +12,17 @@ import org.springframework.stereotype.Service;
 import talent.campus.examenRubenDiaz.dto.PartidoPayload;
 import talent.campus.examenRubenDiaz.model.Partido;
 import talent.campus.examenRubenDiaz.repository.PartidoRepository;
+import talent.campus.examenRubenDiaz.utils.ExceptionFactoryUtils;
 
 @Service
 @Transactional
 public class PartidoService {
-	
+
 	@Autowired
 	private PartidoRepository partidoRepository;
 	@Autowired
 	private EquipoService equipoService;
-	
+
 	public PartidoPayload toPartidoPayload(Partido partido) {
 		PartidoPayload partidoPayload = new PartidoPayload();
 		partidoPayload.setId(partido.getId());
@@ -31,10 +33,26 @@ public class PartidoService {
 		partidoPayload.setPuntuacionEquipoVisitante(partido.getPuntuacionEquipoVisitante());
 		return partidoPayload;
 	}
-	
-	public List<PartidoPayload> findAll(){
+
+	public List<PartidoPayload> findAll() {
 		return this.partidoRepository.findAll().stream().map(partido -> this.toPartidoPayload(partido))
 				.collect(Collectors.toList());
+	}
+
+	private Partido findById(Integer id) {
+		if (id == null)
+			throw ExceptionFactoryUtils.badRequestException("Id cannot be null");
+		Optional<Partido> partidoOptional = this.partidoRepository.findById(id);
+		if (partidoOptional.isPresent())
+			return partidoOptional.get();
+
+		throw ExceptionFactoryUtils.resourceNotFoundException("Partido no encontrado");
+
+	}
+	
+	public PartidoPayload findPartidoById(Integer id) {
+		Partido partido = this.findById(id);
+		return this.toPartidoPayload(partido);
 	}
 
 }
