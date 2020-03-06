@@ -9,6 +9,7 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import talent.campus.examenRubenDiaz.dto.EquipoPayload;
 import talent.campus.examenRubenDiaz.dto.PartidoPayload;
 import talent.campus.examenRubenDiaz.model.Partido;
 import talent.campus.examenRubenDiaz.repository.PartidoRepository;
@@ -53,6 +54,29 @@ public class PartidoService {
 	public PartidoPayload findPartidoById(Integer id) {
 		Partido partido = this.findById(id);
 		return this.toPartidoPayload(partido);
+	}
+	
+	public PartidoPayload create(PartidoPayload request) {
+		EquipoPayload equipoLocal = this.equipoService.findEquipoById(request.getEquipoLocal().getId());
+		EquipoPayload equipoVisitante = this.equipoService.findEquipoById(request.getEquipoVisitante().getId());
+		request.setEquipoLocal(equipoLocal);
+		request.setEquipoVisitante(equipoVisitante);
+		Partido partido = this.partidoRepository.save(this.toPartido(request));
+		return this.toPartidoPayload(partido);
+	}
+	
+	private void savePartido(PartidoPayload request, Partido partido) {
+		partido.setFecha(request.getFecha());
+		partido.setEquipoLocal(this.equipoService.findById(request.getEquipoLocal().getId()));
+		partido.setEquipoVisitante(this.equipoService.findById(request.getEquipoVisitante().getId()));
+		partido.setPuntuacionEquipoLocal(request.getPuntuacionEquipoLocal());
+		partido.setPuntuacionEquipoVisitante(request.getPuntuacionEquipoVisitante());
+	}
+	
+	private Partido toPartido(PartidoPayload request) {
+		Partido partido = new Partido();
+		this.savePartido(request, partido);
+		return partido;
 	}
 
 }

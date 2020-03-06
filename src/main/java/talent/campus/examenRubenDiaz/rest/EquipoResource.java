@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import talent.campus.examenRubenDiaz.dto.EquipoPayload;
-import talent.campus.examenRubenDiaz.dto.JugadorPayload;
 import talent.campus.examenRubenDiaz.service.EquipoService;
 import talent.campus.examenRubenDiaz.utils.HttpHeaderUtils;
 

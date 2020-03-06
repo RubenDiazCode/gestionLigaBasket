@@ -7,5 +7,5 @@ import talent.campus.examenRubenDiaz.model.Partido;
 
 
 public interface PartidoRepository extends JpaRepository<Partido, Integer>{
-
+	
 }

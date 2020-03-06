@@ -94,7 +94,7 @@ public class EquipoService {
 				.collect(Collectors.toList());
 	}
 
-	private Equipo findById(Integer id) {
+	public Equipo findById(Integer id) {
 		if (id == null)
 			throw ExceptionFactoryUtils.badRequestException("Id cannot be null");
 		Optional<Equipo> equipoOptional = this.equipoRepository.findById(id);
