@@ -67,7 +67,7 @@ CREATE TABLE `equipo` (
 
 LOCK TABLES `equipo` WRITE;
 /*!40000 ALTER TABLE `equipo` DISABLE KEYS */;
-INSERT INTO `equipo` VALUES (1,'Philadelphia 76ers',1946,3),(2,'atlanta hawks',1950,7);
+INSERT INTO `equipo` VALUES (1,'Philadelphia 76ers',1946,1),(2,'atlanta hawks',1950,null);
 /*!40000 ALTER TABLE `equipo` ENABLE KEYS */;
 UNLOCK TABLES;
 
