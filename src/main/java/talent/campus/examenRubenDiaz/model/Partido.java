@@ -19,24 +19,24 @@ public class Partido {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_partido", updatable = false, nullable = false)
-	private Integer id;	
-	
+	private Integer id;
+
 	@ManyToOne
-	@JoinColumn(name="id_equipo_local")
+	@JoinColumn(name = "id_equipo_local")
 	private Equipo equipoLocal;
-		
+
 	@ManyToOne
-	@JoinColumn(name="id_equipo_visitante")
+	@JoinColumn(name = "id_equipo_visitante")
 	private Equipo equipoVisitante;
-	
+
 	@Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-	
-	@Column(name ="puntuacion_equipo_local")
+	@Temporal(TemporalType.DATE)
+	private Date fecha;
+
+	@Column(name = "puntuacion_equipo_local")
 	private int puntuacionEquipoLocal;
-	
-	@Column(name="puntuacion_equipo_visitante")
+
+	@Column(name = "puntuacion_equipo_visitante")
 	private int puntuacionEquipoVisitante;
 
 	public Integer getId() {
@@ -86,7 +86,5 @@ public class Partido {
 	public void setPuntuacionEquipoVisitante(int puntuacionEquipoVisitante) {
 		this.puntuacionEquipoVisitante = puntuacionEquipoVisitante;
 	}
-	
-	
-	
+
 }

@@ -12,13 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
 import talent.campus.examenRubenDiaz.service.EntrenadorService;
 import talent.campus.examenRubenDiaz.utils.HttpHeaderUtils;
-
 
 @RestController
 @RequestMapping("/api/entrenador/")
@@ -26,41 +24,34 @@ public class EntrenadorResource {
 
 	@Autowired
 	private EntrenadorService entrenadorService;
-	
+
 	@GetMapping
-	public ResponseEntity<List<EntrenadorPayload>> findAll(){
-		return new ResponseEntity<>(this.entrenadorService.findAll(),HttpStatus.OK);
+	public ResponseEntity<List<EntrenadorPayload>> findAll() {
+		return new ResponseEntity<>(this.entrenadorService.findAll(), HttpStatus.OK);
 	}
-	
+
 	@GetMapping(path = "/id/{id}/")
-	public ResponseEntity<EntrenadorPayload> findById(@PathVariable("id")Integer id){
-		return new ResponseEntity<>(this.entrenadorService.findEntrenadorById(id),HttpStatus.OK);
+	public ResponseEntity<EntrenadorPayload> findById(@PathVariable("id") Integer id) {
+		return new ResponseEntity<>(this.entrenadorService.findEntrenadorById(id), HttpStatus.OK);
 	}
-	
-	@GetMapping(path = "/filter/")
-	public ResponseEntity<List<EntrenadorPayload>> getByFullName(@RequestParam(name="nombre")String nombre,
-																@RequestParam(name="apellidos")String apellidos){
-		return new ResponseEntity<>(this.entrenadorService.findByFullName(nombre, apellidos),HttpStatus.OK);
-	}
-	
+
 	@PostMapping
-	public ResponseEntity<EntrenadorPayload> create(@RequestBody EntrenadorPayload request){
+	public ResponseEntity<EntrenadorPayload> create(@RequestBody EntrenadorPayload request) {
 		EntrenadorPayload entrenadorPayload = this.entrenadorService.create(request);
-		return new ResponseEntity<>(entrenadorPayload, HttpHeaderUtils.locationHeader(entrenadorPayload.getIdEntrenador()),HttpStatus.CREATED);
+		return new ResponseEntity<>(entrenadorPayload,
+				HttpHeaderUtils.locationHeader(entrenadorPayload.getIdEntrenador()), HttpStatus.CREATED);
 	}
-	
+
 	@DeleteMapping(path = "/{id}/")
-	public ResponseEntity<Void> delete(@PathVariable("id")Integer id){
+	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		this.entrenadorService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	@PutMapping(path="/{id}/")
-	public ResponseEntity<EntrenadorPayload> update(@PathVariable("id") Integer id, @RequestBody EntrenadorPayload request){
-		return new ResponseEntity<>(this.entrenadorService.update(id, request),HttpStatus.OK);
+
+	@PutMapping(path = "/{id}/")
+	public ResponseEntity<EntrenadorPayload> update(@PathVariable("id") Integer id,
+			@RequestBody EntrenadorPayload request) {
+		return new ResponseEntity<>(this.entrenadorService.update(id, request), HttpStatus.OK);
 	}
-	
-	
-	
-	
+
 }

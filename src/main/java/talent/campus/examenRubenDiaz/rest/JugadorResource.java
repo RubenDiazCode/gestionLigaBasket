@@ -34,33 +34,35 @@ public class JugadorResource {
 	public ResponseEntity<JugadorPayload> findById(@PathVariable("id") Integer id) {
 		return new ResponseEntity<>(this.jugadorService.findJugadorById(id), HttpStatus.OK);
 	}
-	
-	@GetMapping(path ="/filter/")
-	public ResponseEntity<List<JugadorPayload>> getByEquipoAndEdad(@RequestParam(name="id")Integer id,
-																@RequestParam(name="edad")Integer edad){
+
+	@GetMapping(path = "/filter/")
+	public ResponseEntity<List<JugadorPayload>> getByEquipoAndEdad(@RequestParam(name = "id") Integer id,
+			@RequestParam(name = "edad") Integer edad) {
 		return new ResponseEntity<>(this.jugadorService.findByEquipoAndEdad(id, edad), HttpStatus.OK);
 	}
-	
+
 	@PostMapping
-	public ResponseEntity<JugadorPayload> create(@RequestBody JugadorPayload request){
+	public ResponseEntity<JugadorPayload> create(@RequestBody JugadorPayload request) {
 		JugadorPayload jugadorPayload = this.jugadorService.create(request);
-		return new ResponseEntity<>(jugadorPayload, HttpHeaderUtils.locationHeader(jugadorPayload.getId()),HttpStatus.CREATED);
+		return new ResponseEntity<>(jugadorPayload, HttpHeaderUtils.locationHeader(jugadorPayload.getId()),
+				HttpStatus.CREATED);
 	}
-	
-	@DeleteMapping(path="/{id}/")
-	public ResponseEntity<Void> delete(@PathVariable("id")Integer id){
+
+	@DeleteMapping(path = "/{id}/")
+	public ResponseEntity<Void> delete(@PathVariable("id") Integer id) {
 		this.jugadorService.deleteById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
-	
-	@PutMapping(path="/{id}/")
-	public ResponseEntity<JugadorPayload> update(@PathVariable("id")Integer id, @RequestBody JugadorPayload request){
-		return new ResponseEntity<>(this.jugadorService.update(id, request),HttpStatus.OK);
+
+	@PutMapping(path = "/{id}/")
+	public ResponseEntity<JugadorPayload> update(@PathVariable("id") Integer id, @RequestBody JugadorPayload request) {
+		return new ResponseEntity<>(this.jugadorService.update(id, request), HttpStatus.OK);
 	}
-	
-	@PutMapping(path="/equipo/{id}/")
-	public ResponseEntity<JugadorPayload> updateEquipo(@PathVariable("id")Integer id, @RequestBody JugadorPayload request){
-		return new ResponseEntity<>(this.jugadorService.updateEquipo(id, request),HttpStatus.OK);
+
+	@PutMapping(path = "/equipo/{id}/")
+	public ResponseEntity<JugadorPayload> updateEquipo(@PathVariable("id") Integer id,
+			@RequestBody JugadorPayload request) {
+		return new ResponseEntity<>(this.jugadorService.updateEquipo(id, request), HttpStatus.OK);
 	}
-	
+
 }

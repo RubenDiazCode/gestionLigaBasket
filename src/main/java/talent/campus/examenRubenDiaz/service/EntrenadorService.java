@@ -9,11 +9,8 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
-import talent.campus.examenRubenDiaz.dto.EquipoPayload;
 import talent.campus.examenRubenDiaz.model.Entrenador;
-import talent.campus.examenRubenDiaz.model.Equipo;
 import talent.campus.examenRubenDiaz.repository.EntrenadorRepository;
-import talent.campus.examenRubenDiaz.repository.EquipoRepository;
 import talent.campus.examenRubenDiaz.utils.ExceptionFactoryUtils;
 
 @Service
@@ -60,11 +57,6 @@ public class EntrenadorService {
 	public EntrenadorPayload findEntrenadorById(Integer id) {
 		Entrenador entrenador = this.findById(id);
 		return this.toEntrenadorPayload(entrenador);
-	}
-
-	public List<EntrenadorPayload> findByFullName(String nombre, String apellidos) {
-		return this.entrenadorRepository.findByFullName(nombre, apellidos).stream()
-				.map(entrenador -> this.toEntrenadorPayload(entrenador)).collect(Collectors.toList());
 	}
 
 	

@@ -28,10 +28,6 @@ public class Entrenador {
 
 	@Column(name = "edad")
 	private Integer edad;
-	
-//	@OneToOne(mappedBy= "entrenador")
-//	private Equipo equipo;
-
 
 	public Integer getIdEntrenador() {
 		return this.idEntrenador;
@@ -63,19 +59,6 @@ public class Entrenador {
 
 	public void setEdad(Integer edad) {
 		this.edad = edad;
-	}
-	
-//	public Equipo getEquipo() {
-//		return this.equipo;
-//	}
-//	
-//	public void setEquipo(Equipo equipo) {
-//		this.equipo = equipo;
-//	}
-	@Override
-	public String toString() {
-		// TODO Auto-generated method stub
-		return this.nombre+ " - "+this.apellidos;
 	}
 
 }

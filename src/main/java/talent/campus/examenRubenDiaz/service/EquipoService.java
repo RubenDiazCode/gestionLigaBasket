@@ -38,32 +38,31 @@ public class EquipoService {
 		equipoPayload.setNombre(equipo.getNombre());
 		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
 		equipoPayload.setJugadores(castToListJugadorPayload(equipo.getJugadores()));
-		if(equipo.getEntrenador()==null) {
+		if (equipo.getEntrenador() == null) {
 			equipoPayload.setEntrenador(null);
-		}else {	
+		} else {
 			equipoPayload.setEntrenador(this.entrenadorService.toEntrenadorPayload(equipo.getEntrenador()));
 		}
 		equipoPayload.setPartidosLocal(castToListPartidoPayload(equipo.getPartidosLocal()));
 		equipoPayload.setPartidosVisitante(castToListPartidoPayload(equipo.getPartidosVisitante()));
 		return equipoPayload;
 	}
-	
-	
+
 	private void saveEquipo(EquipoPayload request, Equipo equipo) {
 		equipo.setNombre(request.getNombre());
 		equipo.setAnyoFundacion(request.getAnyoFundacion());
-	
+
 	}
-	
+
 	private Equipo toEquipo(EquipoPayload request) {
 		Equipo equipo = new Equipo();
 		this.saveEquipo(request, equipo);
 		return equipo;
 	}
-	
-	public List<JugadorPayload> castToListJugadorPayload(List<Jugador> request){
+
+	public List<JugadorPayload> castToListJugadorPayload(List<Jugador> request) {
 		List<JugadorPayload> listaJugadores = new ArrayList<>();
-		for(Jugador j: request) {
+		for (Jugador j : request) {
 			JugadorPayload jugadorPayload = new JugadorPayload();
 			jugadorPayload.setId(j.getId());
 			jugadorPayload.setNombre(j.getNombre());
@@ -73,10 +72,10 @@ public class EquipoService {
 		}
 		return listaJugadores;
 	}
-	
-	public List<PartidoPayload> castToListPartidoPayload(List<Partido> request){
+
+	public List<PartidoPayload> castToListPartidoPayload(List<Partido> request) {
 		List<PartidoPayload> listaPartidos = new ArrayList<>();
-		for(Partido p: request) {
+		for (Partido p : request) {
 			PartidoPayload partidoPayload = new PartidoPayload();
 			partidoPayload.setId(p.getId());
 			partidoPayload.setFecha(p.getFecha());
@@ -86,8 +85,6 @@ public class EquipoService {
 		}
 		return listaPartidos;
 	}
-
-
 
 	public List<EquipoPayload> findAll() {
 		return this.equipoRepository.findAll().stream().map(equipo -> this.toEquipoPayload(equipo))
@@ -102,53 +99,49 @@ public class EquipoService {
 			return equipoOptional.get();
 		throw ExceptionFactoryUtils.resourceNotFoundException("Equipo no encontrado");
 	}
-	
+
 	public EquipoPayload findEquipoById(Integer id) {
 		Equipo equipo = this.findById(id);
 		return this.toEquipoPayload(equipo);
 	}
-	
+
 	public EquipoPayload create(EquipoPayload request) {
-		if(this.equipoRepository.existsByNombre(request.getNombre()))
+		if (this.equipoRepository.existsByNombre(request.getNombre()))
 			throw ExceptionFactoryUtils.internalErrorException("El equipo ya existe");
-		
+
 		Equipo equipo = this.equipoRepository.save(this.toEquipo(request));
 		return this.toEquipoPayload(equipo);
 	}
-	
+
 	public void deleteById(Integer id) {
 		Equipo equipo = this.findById(id);
 		this.equipoRepository.delete(equipo);
 	}
-	
+
 	public EquipoPayload update(Integer id, EquipoPayload request) {
 		Equipo equipo = this.findById(id);
 		this.saveEquipo(request, equipo);
 		Equipo equipoResult = this.equipoRepository.save(equipo);
 		return this.toEquipoPayload(equipoResult);
 	}
-	
+
 	public EquipoPayload updateEntrenador(Integer idEntrenador, EquipoPayload request) {
 		Entrenador entrenador = new Entrenador();
 		Equipo equipo = this.findById(request.getId());
 		Optional<Entrenador> entrenadorOptional = this.entrenadorRepository.findById(idEntrenador);
-		if(entrenadorOptional.isPresent())
+		if (entrenadorOptional.isPresent())
 			entrenador = entrenadorOptional.get();
 		equipo.setEntrenador(entrenador);
 		this.saveEquipo(request, equipo);
 		Equipo equipoResult = this.equipoRepository.save(equipo);
 		return this.toEquipoPayload(equipoResult);
-		
+
 	}
-	
-	//ejercicio 3
-	public List<EquipoPayload> findByNombreJugador(String nombre){
-		List<EquipoPayload> lista = this.equipoRepository.findByNombreJugador(nombre).stream().map(equipo -> this.toEquipoPayload(equipo))
-				.collect(Collectors.toList());
+
+	public List<EquipoPayload> findByNombreJugador(String nombre) {
+		List<EquipoPayload> lista = this.equipoRepository.findByNombreJugador(nombre).stream()
+				.map(equipo -> this.toEquipoPayload(equipo)).collect(Collectors.toList());
 		return lista;
 	}
-	
-	
-
 
 }

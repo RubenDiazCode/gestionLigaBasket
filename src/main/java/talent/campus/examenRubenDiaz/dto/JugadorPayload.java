@@ -3,19 +3,19 @@ package talent.campus.examenRubenDiaz.dto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class JugadorPayload {
-	
+
 	@JsonProperty(value = "id")
 	private Integer id;
-	
+
 	@JsonProperty(value = "nombre")
 	private String nombre;
-	
+
 	@JsonProperty(value = "apellidos")
 	private String apellidos;
-	
+
 	@JsonProperty(value = "edad")
 	private Integer edad;
-	
+
 	@JsonProperty(value = "equipo")
 	private EquipoPayload equipo;
 
@@ -58,7 +58,5 @@ public class JugadorPayload {
 	public void setEquipo(EquipoPayload equipo) {
 		this.equipo = equipo;
 	}
-	
-	
 
 }

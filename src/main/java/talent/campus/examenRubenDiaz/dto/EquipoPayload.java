@@ -8,25 +8,24 @@ public class EquipoPayload {
 
 	@JsonProperty(value = "id")
 	private Integer id;
-	
+
 	@JsonProperty(value = "nombre")
 	private String nombre;
-	
+
 	@JsonProperty(value = "anyo_fundacion")
 	private Integer anyoFundacion;
-	
+
 	@JsonProperty(value = "entrenador")
 	private EntrenadorPayload entrenador;
-	
+
 	@JsonProperty(value = "jugadores")
 	private List<JugadorPayload> jugadores;
 
 	@JsonProperty(value = "partidos_local")
 	private List<PartidoPayload> partidosLocal;
-	
+
 	@JsonProperty(value = "partidos_visitante")
 	private List<PartidoPayload> partidosVisitante;
-	
 
 	public Integer getId() {
 		return this.id;
@@ -59,7 +58,7 @@ public class EquipoPayload {
 	public void setEntrenador(EntrenadorPayload entrenador) {
 		this.entrenador = entrenador;
 	}
-	
+
 	public List<JugadorPayload> getJugadores() {
 		return this.jugadores;
 	}
@@ -83,8 +82,5 @@ public class EquipoPayload {
 	public void setPartidosVisitante(List<PartidoPayload> partidosVisitante) {
 		this.partidosVisitante = partidosVisitante;
 	}
-	
-	
-	
-	
+
 }

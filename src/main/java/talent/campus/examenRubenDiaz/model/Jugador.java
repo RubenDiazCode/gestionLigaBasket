@@ -17,7 +17,7 @@ public class Jugador {
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id_jugador", updatable = false, nullable = false)
 	private Integer id;
-	
+
 	@Column(name = "nombre")
 	private String nombre;
 
@@ -26,11 +26,10 @@ public class Jugador {
 
 	@Column(name = "edad")
 	private Integer edad;
-	
+
 	@ManyToOne
 	@JoinColumn(name = "equipo_id_equipo")
 	private Equipo equipo;
-	
 
 	public Integer getId() {
 		return this.id;
@@ -71,7 +70,5 @@ public class Jugador {
 	public void setEquipo(Equipo equipo) {
 		this.equipo = equipo;
 	}
-	
-	
-	
+
 }

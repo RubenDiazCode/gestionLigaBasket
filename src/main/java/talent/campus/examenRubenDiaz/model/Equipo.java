@@ -29,16 +29,16 @@ public class Equipo {
 	@Column(name = "anyo_fundacion")
 	private Integer anyoFundacion;
 
-	@OneToOne(cascade=CascadeType.ALL)
+	@OneToOne(cascade = CascadeType.ALL)
 	@JoinColumn(name = "entrenador_id_entrenador")
 	private Entrenador entrenador;
 
 	@OneToMany(mappedBy = "equipo")
 	private List<Jugador> jugadores = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "equipoLocal")
 	private List<Partido> partidosLocal = new ArrayList<>();
-	
+
 	@OneToMany(mappedBy = "equipoVisitante")
 	private List<Partido> partidosVisitante = new ArrayList<>();
 
@@ -97,6 +97,5 @@ public class Equipo {
 	public void setPartidosVisitante(List<Partido> partidosVisitante) {
 		this.partidosVisitante = partidosVisitante;
 	}
-	
 
 }

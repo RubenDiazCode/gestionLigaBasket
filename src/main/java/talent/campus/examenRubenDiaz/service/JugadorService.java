@@ -25,7 +25,6 @@ public class JugadorService {
 	private EquipoRepository equipoRepository;
 	@Autowired
 	private EquipoService equipoService;
-	
 
 	public JugadorPayload toJugadorPayload(Jugador jugador) {
 		JugadorPayload jugadorPayload = new JugadorPayload();
@@ -33,12 +32,12 @@ public class JugadorService {
 		jugadorPayload.setNombre(jugador.getNombre());
 		jugadorPayload.setApellidos(jugador.getApellidos());
 		jugadorPayload.setEdad(jugador.getEdad());
-		if(jugador.getEquipo()==null) {
+		if (jugador.getEquipo() == null) {
 			jugadorPayload.setEquipo(null);
-		}else {
+		} else {
 			jugadorPayload.setEquipo(this.equipoService.toEquipoPayload(jugador.getEquipo()));
 		}
-		
+
 		return jugadorPayload;
 	}
 
@@ -53,7 +52,6 @@ public class JugadorService {
 		this.saveJugador(request, jugador);
 		return jugador;
 	}
-	
 
 	public List<JugadorPayload> findAll() {
 		return this.jugadorRepository.findAll().stream().map(jugador -> this.toJugadorPayload(jugador))
@@ -80,37 +78,35 @@ public class JugadorService {
 		Jugador jugador = this.jugadorRepository.save(this.toJugador(request));
 		return this.toJugadorPayload(jugador);
 	}
-	
+
 	public void deleteById(Integer id) {
 		Jugador jugador = this.findById(id);
 		this.jugadorRepository.delete(jugador);
 	}
-	
+
 	public JugadorPayload update(Integer id, JugadorPayload request) {
 		Jugador jugador = this.findById(id);
 		this.saveJugador(request, jugador);
 		Jugador jugadorResult = this.jugadorRepository.save(jugador);
 		return this.toJugadorPayload(jugadorResult);
 	}
-	
+
 	public JugadorPayload updateEquipo(Integer idEquipo, JugadorPayload request) {
 		Equipo equipo = new Equipo();
 		Jugador jugador = this.findById(request.getId());
 		Optional<Equipo> equipoOptional = this.equipoRepository.findById(idEquipo);
 		if (equipoOptional.isPresent())
-			equipo= equipoOptional.get();
+			equipo = equipoOptional.get();
 		jugador.setEquipo(equipo);
 		this.saveJugador(request, jugador);
 		Jugador jugadorResult = this.jugadorRepository.save(jugador);
 		return this.toJugadorPayload(jugadorResult);
-		
+
 	}
-	
-	//ejercicio 3
-	public List<JugadorPayload> findByEquipoAndEdad(Integer id, Integer edad){
+
+	public List<JugadorPayload> findByEquipoAndEdad(Integer id, Integer edad) {
 		return this.jugadorRepository.findByEquipoAndEdad(id, edad).stream()
-				.map(jugador -> this.toJugadorPayload(jugador))
-				.collect(Collectors.toList());
+				.map(jugador -> this.toJugadorPayload(jugador)).collect(Collectors.toList());
 	}
 
 }

@@ -72,6 +72,5 @@ public class PartidoPayload {
 	public void setPuntuacionEquipoVisitante(Integer puntuacionEquipoVisitante) {
 		this.puntuacionEquipoVisitante = puntuacionEquipoVisitante;
 	}
-	
-	
+
 }
