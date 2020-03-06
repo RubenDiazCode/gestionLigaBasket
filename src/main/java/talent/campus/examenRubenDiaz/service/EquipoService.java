@@ -36,6 +36,7 @@ public class EquipoService {
 		EquipoPayload equipoPayload = new EquipoPayload();
 		equipoPayload.setId(equipo.getId());
 		equipoPayload.setNombre(equipo.getNombre());
+		equipoPayload.setAnyoFundacion(equipo.getAnyoFundacion());
 		equipoPayload.setJugadores(castToListJugadorPayload(equipo.getJugadores()));
 		if(equipo.getEntrenador()==null) {
 			equipoPayload.setEntrenador(null);
@@ -81,6 +82,7 @@ public class EquipoService {
 			partidoPayload.setFecha(p.getFecha());
 			partidoPayload.setPuntuacionEquipoLocal(p.getPuntuacionEquipoLocal());
 			partidoPayload.setPuntuacionEquipoVisitante(p.getPuntuacionEquipoVisitante());
+			listaPartidos.add(partidoPayload);
 		}
 		return listaPartidos;
 	}
