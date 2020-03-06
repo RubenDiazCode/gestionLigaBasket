@@ -21,6 +21,11 @@ public class EquipoPayload {
 	@JsonProperty(value = "jugadores")
 	private List<JugadorPayload> jugadores;
 
+	@JsonProperty(value = "partidos_local")
+	private List<PartidoPayload> partidosLocal;
+	
+	@JsonProperty(value = "partidos_visitante")
+	private List<PartidoPayload> partidosVisitante;
 	
 
 	public Integer getId() {
@@ -62,6 +67,24 @@ public class EquipoPayload {
 	public void setJugadores(List<JugadorPayload> jugadores) {
 		this.jugadores = jugadores;
 	}
+
+	public List<PartidoPayload> getPartidosLocal() {
+		return this.partidosLocal;
+	}
+
+	public void setPartidosLocal(List<PartidoPayload> partidosLocal) {
+		this.partidosLocal = partidosLocal;
+	}
+
+	public List<PartidoPayload> getPartidosVisitante() {
+		return this.partidosVisitante;
+	}
+
+	public void setPartidosVisitante(List<PartidoPayload> partidosVisitante) {
+		this.partidosVisitante = partidosVisitante;
+	}
+	
+	
 	
 	
 }

@@ -35,6 +35,12 @@ public class Equipo {
 
 	@OneToMany(mappedBy = "equipo")
 	private List<Jugador> jugadores = new ArrayList<Jugador>();
+	
+	@OneToMany(mappedBy = "equipoLocal")
+	private List<Partido> partidosLocal = new ArrayList<>();
+	
+	@OneToMany(mappedBy = "equipoVisitante")
+	private List<Partido> partidosVisitante = new ArrayList<>();
 
 	public Integer getId() {
 		return this.id;
@@ -74,6 +80,22 @@ public class Equipo {
 
 	public void setJugadores(List<Jugador> jugadores) {
 		this.jugadores = jugadores;
+	}
+
+	public List<Partido> getPartidosLocal() {
+		return this.partidosLocal;
+	}
+
+	public void setPartidosLocal(List<Partido> partidosLocal) {
+		this.partidosLocal = partidosLocal;
+	}
+
+	public List<Partido> getPartidosVisitante() {
+		return this.partidosVisitante;
+	}
+
+	public void setPartidosVisitante(List<Partido> partidosVisitante) {
+		this.partidosVisitante = partidosVisitante;
 	}
 	
 

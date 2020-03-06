@@ -10,12 +10,13 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import talent.campus.examenRubenDiaz.dto.EntrenadorPayload;
 import talent.campus.examenRubenDiaz.dto.EquipoPayload;
 import talent.campus.examenRubenDiaz.dto.JugadorPayload;
+import talent.campus.examenRubenDiaz.dto.PartidoPayload;
 import talent.campus.examenRubenDiaz.model.Entrenador;
 import talent.campus.examenRubenDiaz.model.Equipo;
 import talent.campus.examenRubenDiaz.model.Jugador;
+import talent.campus.examenRubenDiaz.model.Partido;
 import talent.campus.examenRubenDiaz.repository.EntrenadorRepository;
 import talent.campus.examenRubenDiaz.repository.EquipoRepository;
 import talent.campus.examenRubenDiaz.utils.ExceptionFactoryUtils;
@@ -41,11 +42,10 @@ public class EquipoService {
 		}else {	
 			equipoPayload.setEntrenador(this.entrenadorService.toEntrenadorPayload(equipo.getEntrenador()));
 		}
+		equipoPayload.setPartidosLocal(castToListPartidoPayload(equipo.getPartidosLocal()));
+		equipoPayload.setPartidosVisitante(castToListPartidoPayload(equipo.getPartidosVisitante()));
 		return equipoPayload;
 	}
-	
-	
-	
 	
 	
 	private void saveEquipo(EquipoPayload request, Equipo equipo) {
@@ -72,20 +72,35 @@ public class EquipoService {
 		}
 		return listaJugadores;
 	}
-	public List<Jugador> castToListJugador(List<JugadorPayload> request){
-		List<Jugador> listaJugadores = new ArrayList<>();
-		for(JugadorPayload j: request) {
-			Jugador jugador = new Jugador();
-			jugador.setId(j.getId());
-			jugador.setNombre(j.getNombre());
-			jugador.setApellidos(j.getApellidos());
-			jugador.setEdad(j.getEdad());
-			jugador.setEquipo(toEquipo(j.getEquipo()));
-			listaJugadores.add(jugador);
+	
+	public List<PartidoPayload> castToListPartidoPayload(List<Partido> request){
+		List<PartidoPayload> listaPartidos = new ArrayList<>();
+		for(Partido p: request) {
+			PartidoPayload partidoPayload = new PartidoPayload();
+			partidoPayload.setId(p.getId());
+//			partidoPayload.setEquipoLocal(toEquipoPayload(p.getEquipoLocal()));
+//			partidoPayload.setEquipoVisitante(toEquipoPayload(p.getEquipoVisitante()));
+			partidoPayload.setFecha(p.getFecha());
+			partidoPayload.setPuntuacionEquipoLocal(p.getPuntuacionEquipoLocal());
+			partidoPayload.setPuntuacionEquipoVisitante(p.getPuntuacionEquipoVisitante());
 		}
-		return listaJugadores;
+		return listaPartidos;
 	}
 
+//	
+//	public List<Jugador> castToListJugador(List<JugadorPayload> request){
+//		List<Jugador> listaJugadores = new ArrayList<>();
+//		for(JugadorPayload j: request) {
+//			Jugador jugador = new Jugador();
+//			jugador.setId(j.getId());
+//			jugador.setNombre(j.getNombre());
+//			jugador.setApellidos(j.getApellidos());
+//			jugador.setEdad(j.getEdad());
+//			jugador.setEquipo(toEquipo(j.getEquipo()));
+//			listaJugadores.add(jugador);
+//		}
+//		return listaJugadores;
+//	}
 
 	public List<EquipoPayload> findAll() {
 		return this.equipoRepository.findAll().stream().map(equipo -> this.toEquipoPayload(equipo))
