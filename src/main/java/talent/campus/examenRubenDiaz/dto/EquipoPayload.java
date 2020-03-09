@@ -82,5 +82,7 @@ public class EquipoPayload {
 	public void setPartidosVisitante(List<PartidoPayload> partidosVisitante) {
 		this.partidosVisitante = partidosVisitante;
 	}
+	
+	
 
 }

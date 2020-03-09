@@ -97,5 +97,11 @@ public class Equipo {
 	public void setPartidosVisitante(List<Partido> partidosVisitante) {
 		this.partidosVisitante = partidosVisitante;
 	}
+	
+	@Override
+	public String toString() {
+		// TODO Auto-generated method stub
+		return super.toString();
+	}
 
 }
